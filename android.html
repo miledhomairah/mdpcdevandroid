@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Resources - MDPC</title>
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64x64.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="/favicon-128x128.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="/favicon-256x256.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .resources {max-width:900px;margin:2rem auto;color:aliceblue}
+        pre {background:#111;padding:12px;border-radius:6px;overflow:auto}
+        ul.resources-list{line-height:1.6}
+    </style>
+</head>
+<body>
+    <header>
+        <H1>MDPC - Android</H1>
+        <nav>
+            <a href="index.html">Dev-Home</a>
+            <a href="guide.html">Guide</a>
+            <a href="mailto:miledghadybernardsanaa@gmail.com">Contact</a>
+        </nav>
+    </header>
+    <main class="resources">
+        <h2>Quick Resources</h2>
+        <ul class="resources-list">
+            <li><strong>Android Studio:</strong> https://developer.android.com/studio</li>
+            <li><strong>Android Docs:</strong> https://developer.android.com/</li>
+            <li><strong>Jetpack Compose:</strong> https://developer.android.com/jetpack/compose</li>
+            <li><strong>Play Console:</strong> https://play.google.com/console</li>
+            <li><strong>Firebase:</strong> https://firebase.google.com/</li>
+            <li><strong>PWA + Android:</strong> https://web.dev/progressive-web-apps/</li>
+        </ul>
+
+        <h3>Common Commands</h3>
+        <pre>
+// Install APK via adb
+adb install -r app/build/outputs/apk/debug/app-debug.apk
+
+// Build release AAB
+./gradlew bundleRelease
+
+// Generate signed APK (example)
+./gradlew assembleRelease
+
+// List connected devices
+adb devices -l
+        </pre>
+
+        <h3>Helpful Tips</h3>
+        <ul>
+            <li>Use Jetpack libraries for lifecycle, navigation and paging.</li>
+            <li>Prefer Android App Bundle (.aab) for Play Store uploads.</li>
+            <li>Automate signing and upload with GitHub Actions / Fastlane.</li>
+            <li>Enable ProGuard / R8 for release builds.</li>
+        </ul>
+
+        <p>Want sample code or CI examples added? Reply and I'll add them.</p>
+    </main>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide - MDPC</title>
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64x64.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="/favicon-128x128.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="/favicon-256x256.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .guide {max-width:900px;margin:2rem auto;color:aliceblue}
+        .guide h2{margin-top:0}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>MDPC - Guide</h1>
+        <nav>
+            <a href="index.html">Dev-Home</a>
+            <a href="android.html">Android Dev</a>
+            <a href="mailto:miledghadybernardsanaa@gmail.com">Contact</a>
+        </nav>
+    </header>
+    <main class="guide">
+        <h2>Site Guide</h2>
+        <p>This guide explains how to use the links and tools exposed on the site: the Quick Menu (from the homepage) and the Android resources page.</p>
+
+        <h3>Quick Menu tools (from index)</h3>
+        <h4>Play Console — basic flow</h4>
+        <ol>
+            <li>Click "Go To Play Console" to open the Play Console and sign in with the developer account.</li>
+            <li>Create a new app: "All apps" → "Create app" → choose app type and default language.</li>
+            <li>Prepare your app bundle: build an Android App Bundle (.aab) locally with <code>./gradlew bundleRelease</code> and sign it.</li>
+            <li>In Play Console: "Release" → "Production" → "Create new release" → upload the .aab, provide release notes, review and roll out.</li>
+            <li>Complete store listing (screenshots, description), content rating, and set pricing/distribution before publishing.</li>
+        </ol>
+
+        <h4>Android Studio — installer</h4>
+        <ol>
+            <li>Click the Android Studio link to download the installer (Windows .exe).</li>
+            <li>Run the installer and follow the wizard to install Android Studio and the Android SDK.</li>
+            <li>Open Android Studio → "Open or Import" → select your project folder to load Gradle and SDK settings.</li>
+            <li>Set an SDK and JDK path if prompted, then build the project with "Build → Make Project".</li>
+        </ol>
+
+        <h4>PWA Builder — convert web app to Android</h4>
+        <ol>
+            <li>Open PWA Builder and enter your site's URL.</li>
+            <li>Follow the checklist: manifest, service worker, icons. Download the generated assets or follow the instructions to add them to your project.</li>
+            <li>Test PWA functionality with Lighthouse (Chrome DevTools) and then consider using Trusted Web Activity or Trusted Web Activity wrappers for Play Store distribution.</li>
+        </ol>
+
+        <h3>Android resources (from android.html)</h3>
+        <p>The Android page contains quick commands and links. Use these sample commands locally inside your project directory.</p>
+        <pre>
+// Install APK via adb
+adb install -r app/build/outputs/apk/debug/app-debug.apk
+
+// Build release AAB
+./gradlew bundleRelease
+
+// Build signed release APK
+./gradlew assembleRelease
+
+// List connected devices
+adb devices -l
+        </pre>
+
+        <h4>Tips for preparing a release</h4>
+        <ul>
+            <li>Use `keytool` / the Android Studio signing dialog to create a keystore and sign your releases.</li>
+            <li>Prefer App Bundles (.aab) for Play Store — they reduce download size and enable Play optimizations.</li>
+            <li>Enable ProGuard/R8 (minifyEnabled true) for release builds to shrink and obfuscate code.</li>
+            <li>Automate builds and uploads with CI (GitHub Actions, Bitrise) or tools like Fastlane.</li>
+        </ul>
+
+        <h3>Where to go next</h3>
+        <p>If you'd like I can add any of the following as full walkthroughs: CI pipeline example, Fastlane setup, signed-release step-by-step, or a small sample app with source. Tell me which one to add and I'll implement it.</p>
+    </main>
+</body>
+</html>
