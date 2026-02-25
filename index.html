@@ -41,7 +41,7 @@
         </section>
     </div>
     <script src="script.js"></script>
-    <script type="module">
+<script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 
@@ -55,14 +55,21 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+// Wait for Firebase to fully load user state
 onAuthStateChanged(auth, user => {
-  if (!user) {
-    window.location.href =
-      "https://auth.miled-dev.xyz/?redirect=" +
-      encodeURIComponent(window.location.href);
+  const params = new URLSearchParams(window.location.search);
+  const redirectUrl = params.get("redirect") || window.location.href;
+
+  if (user) {
+    // User is logged in → do nothing
+    console.log("User is logged in:", user.email);
+  } else {
+    // Not logged in → send to auth page
+    window.location.href = `https://auth.miled-dev.xyz/?redirect=${encodeURIComponent(redirectUrl)}`;
   }
 });
 </script>
 </body>
 
 </html>
+
