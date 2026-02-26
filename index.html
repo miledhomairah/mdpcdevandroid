@@ -43,7 +43,12 @@
     <script src="script.js"></script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence
+} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBJGYpc-Zeb1WUs9_WYTZRp5Rrf3fyJlYk",
@@ -55,12 +60,17 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+// 🔑 REQUIRED: must match auth site
+await setPersistence(auth, browserLocalPersistence);
+
+// ✅ ONLY place you redirect
 onAuthStateChanged(auth, (user) => {
   if (!user) {
-    // IMPORTANT: send CURRENT page as redirect
-    const currentUrl = window.location.origin + window.location.pathname;
+    const returnTo =
+      window.location.origin + window.location.pathname;
+
     window.location.replace(
-      `https://auth.miled-dev.xyz/?redirect=${encodeURIComponent(currentUrl)}`
+      `https://auth.miled-dev.xyz/?redirect=${encodeURIComponent(returnTo)}`
     );
   } else {
     console.log("✅ Logged in as:", user.email);
@@ -70,5 +80,6 @@ onAuthStateChanged(auth, (user) => {
 </body>
 
 </html>
+
 
 
