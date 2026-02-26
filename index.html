@@ -41,45 +41,29 @@
         </section>
     </div>
     <script src="script.js"></script>
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-import {
-  getAuth,
-  onAuthStateChanged,
-  setPersistence,
-  browserLocalPersistence
-} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+<script>
+function getCookie(name) {
+  return document.cookie.split('; ').find(row => row.startsWith(name + '='))
+    ?.split('=')[1];
+}
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBJGYpc-Zeb1WUs9_WYTZRp5Rrf3fyJlYk",
-  authDomain: "danlogin-3e18f.firebaseapp.com",
-  projectId: "danlogin-3e18f",
-  appId: "1:661754509510:web:f2c29d318dca86dc6d3fc7"
-};
+const loggedIn = getCookie("mdpc_auth");
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+if (!loggedIn) {
+  const returnTo = window.location.origin + window.location.pathname;
+  window.location.replace(`https://auth.miled-dev.xyz/?redirect=${encodeURIComponent(returnTo)}`);
+}
 
-// 🔑 REQUIRED: must match auth site
-await setPersistence(auth, browserLocalPersistence);
-
-// ✅ ONLY place you redirect
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    const returnTo =
-      window.location.origin + window.location.pathname;
-
-    window.location.replace(
-      `https://auth.miled-dev.xyz/?redirect=${encodeURIComponent(returnTo)}`
-    );
-  } else {
-    console.log("✅ Logged in as:", user.email);
-  }
-});
+function logout() {
+  document.cookie = "mdpc_auth=; path=/; domain=.miled-dev.xyz; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  document.cookie = "mdpc_user=; path=/; domain=.miled-dev.xyz; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+  window.location.replace("https://auth.miled-dev.xyz");
+}
 </script>
 </body>
 
 </html>
+
 
 
 
