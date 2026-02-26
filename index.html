@@ -55,21 +55,20 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// Wait for Firebase to fully load user state
-onAuthStateChanged(auth, user => {
-  const params = new URLSearchParams(window.location.search);
-  const redirectUrl = params.get("redirect") || window.location.href;
-
-  if (user) {
-    // User is logged in → do nothing
-    console.log("User is logged in:", user.email);
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    // IMPORTANT: send CURRENT page as redirect
+    const currentUrl = window.location.origin + window.location.pathname;
+    window.location.replace(
+      `https://auth.miled-dev.xyz/?redirect=${encodeURIComponent(currentUrl)}`
+    );
   } else {
-    // Not logged in → send to auth page
-    window.location.href = `https://auth.miled-dev.xyz/?redirect=${encodeURIComponent(redirectUrl)}`;
+    console.log("✅ Logged in as:", user.email);
   }
 });
 </script>
 </body>
 
 </html>
+
 
